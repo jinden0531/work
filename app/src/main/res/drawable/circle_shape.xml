@@ -1,0 +1,5 @@
+<!-- res/drawable/circle_shape.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#FF6200EE"/> <!-- 背景颜色，可以换成透明 -->
+    <corners android:radius="100dp"/> <!-- 设置一个较大的半径，确保图片显示为圆形 -->
+</shape>

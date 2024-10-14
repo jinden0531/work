@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">work</string>
+    <string name="team_a">隊伍一</string>
+    <string name="team_b">隊伍二</string>
+    <string name="change_name">更改隊伍名稱</string>
+    <string name="history">歷史紀錄</string>
+    <string name="anslze">分析</string>
+    <string name="team_name_format">%s 對 %s</string>
+</resources>
