@@ -1,0 +1,360 @@
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- 工具栏 -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:title="後台模式"
+        android:titleTextColor="@color/white"
+        android:titleTextAppearance="@style/ToolbarTitleText"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:elevation="4dp"
+        />
+
+    <!-- 左侧分数显示 -->
+    <TextView
+        android:id="@+id/left_score_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textSize="24sp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="70dp" />
+
+    <!-- 右侧分数显示 -->
+    <TextView
+        android:id="@+id/right_score_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textSize="24sp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="70dp" />
+
+    <!-- 左下角 圆形按钮布局 -->
+
+    <!-- 右下角 排球场和按钮布局 -->
+
+    <FrameLayout
+        android:layout_width="268dp"
+        android:layout_height="167dp"
+        android:layout_gravity="bottom|start"
+        android:layout_margin="20dp">
+
+        <!-- 圆形主按钮 -->
+        <ImageButton
+            android:id="@+id/centerButton"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:background="@null"
+            android:src="@drawable/volleyball_1" />
+
+        <!-- 周围按钮（初始不可见） -->
+        <ImageButton
+            android:id="@+id/point_button1"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:background="@null"
+            android:src="@drawable/circle_shape"
+            android:visibility="visible" />
+
+        <ImageButton
+            android:id="@+id/sub_button1_1"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:background="@null"
+            android:src="@drawable/circle_shape" />
+
+        <ImageButton
+            android:id="@+id/sub_button1_2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:background="@null"
+            android:src="@drawable/circle_shape" />
+
+        <ImageButton
+            android:id="@+id/point_button2"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:background="@null"
+            android:src="@drawable/circle_shape"
+            android:visibility="visible" />
+
+        <ImageButton
+            android:id="@+id/sub_button2_1"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:background="@null"
+            android:src="@drawable/circle_shape" />
+
+        <ImageButton
+            android:id="@+id/sub_button2_2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:background="@null"
+            android:src="@drawable/circle_shape" />
+
+        <ImageButton
+            android:id="@+id/point_button3"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:background="@null"
+            android:src="@drawable/circle_shape"
+            android:visibility="visible" />
+
+        <ImageButton
+            android:id="@+id/sub_button3_1"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:background="@null"
+            android:src="@drawable/circle_shape" />
+
+        <ImageButton
+            android:id="@+id/sub_button3_2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:background="@null"
+            android:src="@drawable/circle_shape" />
+
+        <ImageButton
+            android:id="@+id/point_button4"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:background="@null"
+            android:src="@drawable/circle_shape"
+            android:visibility="visible" />
+
+        <ImageButton
+            android:id="@+id/sub_button4_1"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:background="@null"
+            android:src="@drawable/circle_shape" />
+
+        <ImageButton
+            android:id="@+id/sub_button4_2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:background="@null"
+            android:src="@drawable/circle_shape" />
+
+        <ImageButton
+            android:id="@+id/point_button5"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:background="@null"
+            android:src="@drawable/circle_shape"
+            android:visibility="visible" />
+
+        <ImageButton
+            android:id="@+id/sub_button5_1"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:background="@null"
+            android:src="@drawable/circle_shape" />
+
+        <ImageButton
+            android:id="@+id/sub_button5_2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:background="@null"
+            android:src="@drawable/circle_shape" />
+
+        <ImageButton
+            android:id="@+id/point_button6"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:background="@null"
+            android:src="@drawable/circle_shape"
+            android:visibility="visible" />
+
+        <ImageButton
+            android:id="@+id/sub_button6_1"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:background="@null"
+            android:src="@drawable/circle_shape" />
+
+        <ImageButton
+            android:id="@+id/sub_button6_2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:background="@null"
+            android:src="@drawable/circle_shape" />
+
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp">
+
+        <!-- 排球场图片 -->
+        <ImageView
+            android:id="@+id/volleyball_court"
+            android:layout_width="300dp"
+            android:layout_height="200dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/court" />
+
+        <!-- 左半部分按钮网格 -->
+        <GridLayout
+            android:id="@+id/buttonGroup1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center_vertical"
+            android:layout_marginStart="25dp"
+            android:columnCount="2"
+            android:rowCount="3">
+
+            <!-- 网格按钮 -->
+            <ImageButton
+                android:id="@+id/button_grid_1"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@null"
+                android:src="@drawable/volleyball_1" />
+
+            <ImageButton
+                android:id="@+id/button_grid_2"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@null"
+                android:src="@drawable/volleyball_6" />
+
+            <ImageButton
+                android:id="@+id/button_grid_3"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@null"
+                android:src="@drawable/volleyball_5" />
+
+            <ImageButton
+                android:id="@+id/button_grid_4"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@null"
+                android:src="@drawable/volleyball_4" />
+
+            <ImageButton
+                android:id="@+id/button_grid_5"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@null"
+                android:src="@drawable/volleyball_3" />
+
+            <ImageButton
+                android:id="@+id/button_grid_6"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@null"
+                android:src="@drawable/volleyball_2" />
+
+        </GridLayout>
+
+        <!-- 右半部分按钮网格 -->
+        <GridLayout
+            android:id="@+id/buttonGroup2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="20dp"
+            android:columnCount="2"
+            android:rowCount="3">
+
+            <!-- 网格按钮 -->
+            <ImageButton
+                android:id="@+id/button_grid_8"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@null"
+                android:src="@drawable/volleyball_2" />
+
+            <ImageButton
+                android:id="@+id/button_grid_7"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@null"
+                android:src="@drawable/volleyball_1" />
+
+            <ImageButton
+                android:id="@+id/button_grid_12"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@null"
+                android:src="@drawable/volleyball_6" />
+
+            <ImageButton
+                android:id="@+id/button_grid_11"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@null"
+                android:src="@drawable/volleyball_5" />
+
+            <ImageButton
+                android:id="@+id/button_grid_10"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@null"
+                android:src="@drawable/volleyball_4" />
+
+            <ImageButton
+                android:id="@+id/button_grid_9"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@null"
+                android:src="@drawable/volleyball_3" />
+
+        </GridLayout>
+
+    </FrameLayout>
+
+    <!-- 交换按钮，位于右侧中间 -->
+    <Button
+        android:id="@+id/swapButtonLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|center_vertical"
+        android:layout_marginEnd="50dp"
+        android:text="Left" />
+
+    <Button
+        android:id="@+id/swapButtonRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|center_vertical"
+        android:layout_marginEnd="150dp"
+        android:text="Right" />
+
+</FrameLayout>

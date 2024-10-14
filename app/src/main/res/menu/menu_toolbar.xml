@@ -1,0 +1,22 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+        <item
+            android:id="@+id/action_analyze"
+            android:title="數據分析"
+            android:orderInCategory="100"
+            android:titleTextColor="@color/black"
+            android:showAsAction="never" />
+
+        <!-- 添加历史记录菜单项 -->
+        <item
+            android:id="@+id/action_history"
+            android:title="歷史紀錄"
+            android:orderInCategory="101"
+            android:titleTextColor="@color/black"
+            android:showAsAction="never" />
+        <item
+            android:id="@+id/action_changename"
+            android:title="更改隊伍名稱"
+            android:orderInCategory="101"
+            android:titleTextColor="@color/black"
+            android:showAsAction="never" />
+</menu>

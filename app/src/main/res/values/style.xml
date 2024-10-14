@@ -1,0 +1,15 @@
+<resources>
+    <!-- 应用的主题，确保继承自 NoActionBar 以便您使用自定义 Toolbar -->
+    <style name="Theme.MyApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/purple_500</item> <!-- 设置主色 -->
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/white</item> <!-- 设置标题文字颜色 -->
+    </style>
+
+    <!-- 自定义 Toolbar 标题样式 -->
+    <style name="ToolbarTitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">20sp</item> <!-- 设置标题文字大小 -->
+        <item name="android:textColor">@color/white</item> <!-- 设置标题文字颜色 -->
+        <item name="android:fontFamily">sans-serif</item> <!-- 设置标题字体 -->
+    </style>
+</resources>
