@@ -20,13 +20,13 @@ public class ModeActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_CHANGE_NAME = 1;
 
     // 左側的圖片資源 ID 陣列
-    int[] leftSideImages = {
-            R.drawable.volleyball_5, // 對應左側位置 1
-            R.drawable.volleyball_4, // 對應左側位置 2
-            R.drawable.volleyball_6, // 對應左側位置 3
-            R.drawable.volleyball_3, // 對應左側位置 4
-            R.drawable.volleyball_1, // 對應左側位置 5
-            R.drawable.volleyball_2  // 對應左側位置 6
+    private int[] drawableIds  = {
+            R.drawable.volleyball_1,
+            R.drawable.volleyball_2,
+            R.drawable.volleyball_3,
+            R.drawable.volleyball_4,
+            R.drawable.volleyball_5,
+            R.drawable.volleyball_6
     };
 
     @Override
@@ -71,46 +71,44 @@ public class ModeActivity extends AppCompatActivity {
         rightNameTextView.setText(rightName);
 
 
-        // 获取主按钮和 gridButtons
-        ImageButton[] gridButtons = new ImageButton[6];
-        for (int i = 1; i <= 6; i++) {
-            String buttonID = "button_grid_" + i;
-            int resID = getResources().getIdentifier(buttonID, "id", getPackageName());
-            gridButtons[i - 1] = findViewById(resID);
-        }
-
         // 获取 centerButton
         ImageButton centerButton = findViewById(R.id.centerButton);
 
+        ImageButton[] gridButtons = new ImageButton[6];
         // 设置 gridButton 的点击监听器
         View.OnClickListener buttonClickListener = v -> {
             ImageButton clickedButton = (ImageButton) v;
             centerButton.setImageDrawable(clickedButton.getDrawable());
-
-            // 确保设置 tag 到 centerButton
-            Object tagObj = clickedButton.getTag();
-            if (tagObj != null) {
-                centerButton.setTag(tagObj);
-                Log.d("CenterButtonTag", "Set tag on centerButton: " + tagObj);  // 添加调试日志
-            } else {
-                Log.d("CenterButtonTag", "Failed to set tag - tag is null");  // 调试
-            }
         };
 
-        // 初始化左側按鈕
-        leftSideButtons = new ArrayList<>(Arrays.asList(
-                findViewById(R.id.button_grid_5),
-                findViewById(R.id.button_grid_3),
-                findViewById(R.id.button_grid_1),
-                findViewById(R.id.button_grid_2),
-                findViewById(R.id.button_grid_4),
-                findViewById(R.id.button_grid_6)
-        ));
+        leftSideButtons = new ArrayList<>();
+        for (int i = 1; i <= 6; i++) {
+            String buttonID = "button_grid_" + i;
+            int resID = getResources().getIdentifier(buttonID, "id", getPackageName());
+            ImageButton button = findViewById(resID);
 
+            if (button != null) {
+                leftSideButtons.add(button);
+            } else {
+                Log.e("Initialization", "Button not found: " + buttonID);
+            }
+        }
+
+        // 初始化 gridButtons
+        for (int i = 1; i <= 6; i++) {
+            String buttonID = "button_grid_" + i;
+            int resID = getResources().getIdentifier(buttonID, "id", getPackageName());
+            gridButtons[i - 1] = findViewById(resID);
+
+            if (gridButtons[i - 1] == null) {
+                Log.e("Initialization", "Button not found: " + buttonID);
+            } else {
+                gridButtons[i - 1].setOnClickListener(buttonClickListener);
+            }
+        }
 
         // 为每个 gridButton 设置点击监听器
         for (int i = 0; i < gridButtons.length; i++) {
-            gridButtons[i].setTag(i + 1);  // 确保每个按钮都有 tag
             gridButtons[i].setOnClickListener(buttonClickListener);
         }
 
@@ -144,12 +142,6 @@ public class ModeActivity extends AppCompatActivity {
         setupSubButtonClickListener(R.id.sub_button5_2, centerButton, leftScore, rightScore, leftScoreTextView, rightScoreTextView);
         setupSubButtonClickListener(R.id.sub_button6_1, centerButton, leftScore, rightScore, leftScoreTextView, rightScoreTextView);
         setupSubButtonClickListener(R.id.sub_button6_2, centerButton, leftScore, rightScore, leftScoreTextView, rightScoreTextView);
-
-        // 確保所有按鈕已被找到
-        if (leftSideButtons.contains(null)) {
-            Log.e("Initialization", "Failed to initialize buttons - some buttons are null.");
-            return;
-        }
     }
 
     private void expandMainButtons(List<ImageButton> buttons, float radius) {
@@ -170,36 +162,35 @@ public class ModeActivity extends AppCompatActivity {
 
     private void setupSubButtonClickListener(int subButtonId, ImageButton centerButton, int[] leftScore, int[] rightScore, TextView leftScoreTextView, TextView rightScoreTextView) {
         ImageButton subButton = findViewById(subButtonId);
-        subButton.setOnClickListener(v -> {
-            Object tagObj = centerButton.getTag();
-            if (tagObj != null) {
-                int tag = (int) tagObj;
 
+        if (subButton != null) { // 确保 subButton 不为空
+            subButton.setOnClickListener(view -> {
+                // 确保 centerButton 的 Drawable 不为空
                 if (centerButton.getDrawable() != null) {
-                    Log.d("SubButtonClick", "Tag on centerButton: " + tag);
+                    // 更新 CenterButton 的 Tag
+                    centerButton.setTag(subButtonId);
 
-                    if (subButtonId == R.id.sub_button1_1 || subButtonId == R.id.sub_button1_2 ||
-                            subButtonId == R.id.sub_button3_1 || subButtonId == R.id.sub_button6_1) {
+                    // 判定是哪一侧加分并轮转图片
+                    if (subButtonId == R.id.sub_button1_1 ||
+                            subButtonId == R.id.sub_button1_2 ||
+                            subButtonId == R.id.sub_button3_1 ||
+                            subButtonId == R.id.sub_button6_1) {
 
-                        if (tag >= 1 && tag <= 6) {
-                            rightScore[0]++;
-                            rightScoreTextView.setText(String.valueOf(rightScore[0]));
-                            Log.d("Rotation", "Right side rotated");
-                            rotateLeftSide();
-                        }
-
+                        rightScore[0]++;
+                        rightScoreTextView.setText(String.valueOf(rightScore[0]));
+                        rotateImagesClockwise();
                     } else {
-                        if (tag >= 1 && tag <= 6) {
-                            leftScore[0]++;
-                            leftScoreTextView.setText(String.valueOf(leftScore[0]));
-                            Log.d("Rotation", "Left side rotated");
-                            rotateLeftSide();
-                        }
+                        leftScore[0]++;
+                        leftScoreTextView.setText(String.valueOf(leftScore[0]));
+                        rotateImagesClockwise();
                     }
                 }
-            }
-        });
+            });
+        } else {
+            Log.e("setupSubButtonClick", "SubButton with ID " + subButtonId + " not found!");
+        }
     }
+
 
     private void setupPointButtonWithSubButtons(ImageButton pointButton, double angleOffset, int... subButtonIds) {
         List<ImageButton> subButtons = new ArrayList<>();
@@ -243,20 +234,41 @@ public class ModeActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void rotateImagesClockwise() {
+        // 保存最后一个图片资源（顺时针移动）
+        int lastDrawable = drawableIds[drawableIds.length - 1];
+
+        // 图片资源顺时针移动
+        for (int i = drawableIds.length - 1; i > 0; i--) {
+            drawableIds[i] = drawableIds[i - 1];
+        }
+        drawableIds[0] = lastDrawable;
+
+        // 更新按钮图片
+        updateButtons();
+
+        // 日志调试
+        Log.d("RotationLogic", "Drawable IDs: " + Arrays.toString(drawableIds));
+    }
+
+
     // 左側按鈕的輪轉方法
     private void rotateLeftSide() {
         if (leftSideButtons != null && !leftSideButtons.isEmpty()) {
             ImageButton lastButton = leftSideButtons.remove(leftSideButtons.size() - 1);
             leftSideButtons.add(0, lastButton); // 將最後一個按鈕移到第一個位置
-            updateButtons(leftSideButtons, leftSideImages); // 更新按鈕的圖像
+            updateButtons(); // 更新按鈕的圖像
         }
     }
-    private void updateButtons(List<ImageButton> buttons, int[] images) {
-        for (int i = 0; i < buttons.size(); i++) {
-            buttons.get(i).setImageResource(images[i]);
-            buttons.get(i).setTag(i + 1); // 更新標籤
+    private void updateButtons() {
+        for (int i = 0; i < leftSideButtons.size(); i++) {
+            leftSideButtons.get(i).setImageResource(drawableIds[i]);
+            leftSideButtons.get(i).setTag(drawableIds[i]); // 同步更新 Tag
         }
     }
+
+
     @Override
     protected void onResume() {
         super.onResume();

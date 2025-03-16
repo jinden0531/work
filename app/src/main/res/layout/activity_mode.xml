@@ -284,7 +284,7 @@
                 <!-- 按鈕 -->
 
                 <ImageButton
-                    android:id="@+id/button_grid_1"
+                    android:id="@+id/button_grid_5"
                     android:layout_width="100dp"
                     android:layout_height="66dp"
                     android:layout_row="0"
@@ -293,7 +293,7 @@
                     android:src="@drawable/volleyball_5" />
 
                 <ImageButton
-                    android:id="@+id/button_grid_2"
+                    android:id="@+id/button_grid_4"
                     android:layout_width="100dp"
                     android:layout_height="66dp"
                     android:layout_row="0"
@@ -302,7 +302,7 @@
                     android:src="@drawable/volleyball_4" />
 
                 <ImageButton
-                    android:id="@+id/button_grid_3"
+                    android:id="@+id/button_grid_6"
                     android:layout_width="100dp"
                     android:layout_height="66dp"
                     android:layout_row="0"
@@ -311,7 +311,7 @@
                     android:src="@drawable/volleyball_6" />
 
                 <ImageButton
-                    android:id="@+id/button_grid_4"
+                    android:id="@+id/button_grid_3"
                     android:layout_width="100dp"
                     android:layout_height="66dp"
                     android:layout_row="1"
@@ -320,7 +320,7 @@
                     android:src="@drawable/volleyball_3" />
 
                 <ImageButton
-                    android:id="@+id/button_grid_5"
+                    android:id="@+id/button_grid_1"
                     android:layout_width="100dp"
                     android:layout_height="66dp"
                     android:layout_row="1"
@@ -329,7 +329,7 @@
                     android:src="@drawable/volleyball_1" />
 
                 <ImageButton
-                    android:id="@+id/button_grid_6"
+                    android:id="@+id/button_grid_2"
                     android:layout_width="100dp"
                     android:layout_height="66dp"
                     android:layout_row="1"
