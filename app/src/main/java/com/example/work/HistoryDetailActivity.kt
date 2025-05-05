@@ -20,7 +20,7 @@ class HistoryDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_score_detail)
+        setContentView(R.layout.activity_history_detail)
 
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -32,7 +32,7 @@ class HistoryDetailActivity : AppCompatActivity() {
         }
 
         dbHelper = DatabaseHelper(this)
-        recyclerView = findViewById(R.id.score_detail_recycler_view)
+        recyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         val historyId = intent.getLongExtra("history_id", -1)
@@ -45,13 +45,13 @@ class HistoryDetailActivity : AppCompatActivity() {
 
     inner class ScoreDetailAdapter(private val scoreDetails: List<ScoreDetail>) : RecyclerView.Adapter<ScoreDetailAdapter.ViewHolder>() {
         inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-            val scoreTextView: TextView = view.findViewById(R.id.detail_score)
-            val timestampTextView: TextView = view.findViewById(R.id.detail_timestamp)
+            val scoreTextView: TextView = view.findViewById(R.id.scoreTextView)
+            val timestampTextView: TextView = view.findViewById(R.id.timestampTextView)
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.score_detail_item, parent, false)
+                .inflate(R.layout.item_history_detail, parent, false)
             return ViewHolder(view)
         }
 

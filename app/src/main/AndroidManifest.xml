@@ -31,12 +31,7 @@
         <!-- BackgroundActivity (支援自動旋轉) -->
         <activity
             android:name=".BackgroundActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="true" />
 
         <!-- HistoryActivity (不支援旋轉) -->
         <activity
@@ -45,15 +40,11 @@
 
         <activity
             android:name=".ChangeTeamNameActivity"
-
-            android:exported="true">
-        </activity>
+            android:exported="true" />
 
         <activity
             android:name=".HistoryDetailActivity"
-            android:exported="true">
-        </activity>
-
+            android:exported="true" />
 
     </application>
 </manifest>
