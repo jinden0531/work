@@ -13,13 +13,13 @@ class ScoreDetailAdapter(private val scoreDetails: List<ScoreDetail>) :
     RecyclerView.Adapter<ScoreDetailAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val scoreTextView: TextView = view.findViewById(R.id.detail_score)
-        val timestampTextView: TextView = view.findViewById(R.id.detail_timestamp)
+        val scoreTextView: TextView = view.findViewById(R.id.scoreTextView)
+        val timestampTextView: TextView = view.findViewById(R.id.timestampTextView)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.score_detail_item, parent, false)
+            .inflate(R.layout.item_history_detail, parent, false)
         return ViewHolder(view)
     }
 

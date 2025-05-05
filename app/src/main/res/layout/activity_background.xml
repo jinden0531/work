@@ -39,6 +39,12 @@
         android:layout_marginTop="70dp" />
 
     <!-- 左下角 圆形按钮布局 -->
+    <include
+        android:id="@+id/left_circle_buttons"
+        layout="@layout/left_circle_buttons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|start" />
 
     <!-- 右下角 排球场和按钮布局 -->
 

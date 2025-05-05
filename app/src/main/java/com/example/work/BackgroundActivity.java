@@ -16,11 +16,10 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.widget.Button;
-
-
+import android.util.Log;
 
 public class BackgroundActivity extends AppCompatActivity {
-
+    private static final String TAG = "BackgroundActivity";
     private GridLayout buttonGroup1, buttonGroup2; // 左右两侧的 GridLayout
     private int leftScore;
     private int rightScore;
@@ -64,7 +63,6 @@ public class BackgroundActivity extends AppCompatActivity {
         Intent intent = getIntent();
         leftScore = intent.getIntExtra("leftScore", 0);  // 默认为 0
         rightScore = intent.getIntExtra("rightScore", 0);  // 默认为 0
-
 
         // 获取 TextView 用于显示分数
         TextView leftScoreTextView = findViewById(R.id.left_score_background);

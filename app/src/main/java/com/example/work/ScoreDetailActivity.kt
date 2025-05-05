@@ -54,21 +54,50 @@ class ScoreDetailActivity : AppCompatActivity() {
     }
 
     inner class ScoreDetailAdapter(private val scoreDetails: List<ScoreDetail>) : RecyclerView.Adapter<ScoreDetailAdapter.ViewHolder>() {
+        private var leftTeamName: String = "隊伍一"
+        private var rightTeamName: String = "隊伍二"
+
+        init {
+            val historyId = intent.getLongExtra("history_id", -1)
+            if (historyId != -1L) {
+                val db = dbHelper.readableDatabase
+                val cursor = db.query(
+                    DatabaseHelper.TABLE_HISTORY,
+                    arrayOf(DatabaseHelper.COLUMN_LEFT_TEAM_NAME, DatabaseHelper.COLUMN_RIGHT_TEAM_NAME),
+                    "${DatabaseHelper.COLUMN_ID} = ?",
+                    arrayOf(historyId.toString()),
+                    null,
+                    null,
+                    null
+                )
+                cursor.use {
+                    if (it.moveToFirst()) {
+                        leftTeamName = it.getString(it.getColumnIndexOrThrow(DatabaseHelper.COLUMN_LEFT_TEAM_NAME))
+                        rightTeamName = it.getString(it.getColumnIndexOrThrow(DatabaseHelper.COLUMN_RIGHT_TEAM_NAME))
+                    }
+                }
+            }
+        }
+
         inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-            val scoreTextView: TextView = view.findViewById(R.id.detail_score)
-            val timestampTextView: TextView = view.findViewById(R.id.detail_timestamp)
+            val scoreTextView: TextView = view.findViewById(R.id.scoreTextView)
+            val timestampTextView: TextView = view.findViewById(R.id.timestampTextView)
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.score_detail_item, parent, false)
+                .inflate(R.layout.item_history_detail, parent, false)
             return ViewHolder(view)
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             try {
                 val item = scoreDetails[position]
-                holder.scoreTextView.text = item.score
+                Log.d("ScoreDetailAdapter", "Binding item at position $position: score=${item.score}")
+                
+                // 組合隊伍名稱和比分
+                val scoreText = "$leftTeamName ${item.score} $rightTeamName"
+                holder.scoreTextView.text = scoreText
                 holder.timestampTextView.text = formatTimestamp(item.timestamp)
             } catch (e: Exception) {
                 Log.e("ScoreDetailAdapter", "Error in onBindViewHolder: ${e.message}", e)

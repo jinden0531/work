@@ -216,6 +216,28 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
     fun getScoreDetails(historyId: Long): List<ScoreDetail> {
         val scoreDetails = mutableListOf<ScoreDetail>()
         val db = readableDatabase
+        
+        // 首先獲取比賽的隊伍名稱
+        val historyCursor = db.query(
+            TABLE_HISTORY,
+            arrayOf(COLUMN_LEFT_TEAM_NAME, COLUMN_RIGHT_TEAM_NAME),
+            "$COLUMN_ID = ?",
+            arrayOf(historyId.toString()),
+            null,
+            null,
+            null
+        )
+        
+        var leftTeamName = "隊伍一"
+        var rightTeamName = "隊伍二"
+        
+        historyCursor.use {
+            if (it.moveToFirst()) {
+                leftTeamName = it.getString(it.getColumnIndexOrThrow(COLUMN_LEFT_TEAM_NAME))
+                rightTeamName = it.getString(it.getColumnIndexOrThrow(COLUMN_RIGHT_TEAM_NAME))
+            }
+        }
+        
         val cursor = db.query(
             TABLE_SCORE_DETAIL,
             arrayOf(COLUMN_ID, COLUMN_SCORE, COLUMN_DETAIL_TIMESTAMP),
@@ -226,12 +248,32 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             "$COLUMN_DETAIL_TIMESTAMP ASC"
         )
 
+        var previousLeftScore = 0
+        var previousRightScore = 0
+
         cursor.use {
             while (it.moveToNext()) {
                 val id = it.getLong(it.getColumnIndexOrThrow(COLUMN_ID))
                 val score = it.getString(it.getColumnIndexOrThrow(COLUMN_SCORE))
                 val timestamp = it.getString(it.getColumnIndexOrThrow(COLUMN_DETAIL_TIMESTAMP))
-                scoreDetails.add(ScoreDetail(id, score, timestamp))
+                
+                // 解析當前分數
+                val scores = score.split(":")
+                val currentLeftScore = scores[0].toInt()
+                val currentRightScore = scores[1].toInt()
+                
+                // 判斷是哪一隊得分
+                val teamName = when {
+                    currentLeftScore > previousLeftScore -> leftTeamName
+                    currentRightScore > previousRightScore -> rightTeamName
+                    else -> "未知隊伍" // 這種情況理論上不應該發生
+                }
+                
+                // 更新前一次的分數
+                previousLeftScore = currentLeftScore
+                previousRightScore = currentRightScore
+                
+                scoreDetails.add(ScoreDetail(id, score, timestamp, teamName))
             }
         }
         return scoreDetails
