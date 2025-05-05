@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 class HistoryAdapter(
     private var historyItems: List<HistoryItem>,
     private val onDeleteClick: (Long) -> Unit,
-    private val onItemClick: (HistoryItem) -> Unit
+    private val onViewDetailsClick: (HistoryItem) -> Unit  // 這是新的 callback
 ) : RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -36,13 +36,12 @@ class HistoryAdapter(
         }
 
         holder.viewDetailsButton.setOnClickListener {
-            onItemClick(historyItem)
+            onViewDetailsClick(historyItem)
         }
+
     }
 
-    override fun getItemCount(): Int {
-        return historyItems.size
-    }
+    override fun getItemCount(): Int = historyItems.size
 
     fun updateData(newHistoryItems: List<HistoryItem>) {
         historyItems = newHistoryItems

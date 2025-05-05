@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.ArrayList;
 import android.app.Activity;
 import android.content.SharedPreferences;
+import android.widget.Button;
 
 
 
@@ -261,16 +262,17 @@ public class BackgroundActivity extends AppCompatActivity {
             return true;
         } else if (id == R.id.action_changename) {
             Intent intent = new Intent(BackgroundActivity.this, ChangeTeamNameActivity.class);
-            startActivity(intent);
+            startActivityForResult(intent, 100);
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 100 && resultCode == Activity.RESULT_OK) {
+        if (requestCode == 200 && resultCode == Activity.RESULT_OK) {
             // 接收從 ChangeTeamNameActivity 返回的隊伍名稱
             String teamAName = data.getStringExtra("teamAName");
             String teamBName = data.getStringExtra("teamBName");

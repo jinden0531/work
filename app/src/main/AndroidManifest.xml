@@ -50,7 +50,7 @@
         </activity>
 
         <activity
-            android:name=".DetailsActivity"
+            android:name=".HistoryDetailActivity"
             android:exported="true">
         </activity>
 

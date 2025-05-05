@@ -1,7 +1,6 @@
 package com.example.work
 
-import android.app.Activity
-import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -9,48 +8,53 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 
 class ChangeTeamNameActivity : AppCompatActivity() {
-
-    private lateinit var databaseHelper: DatabaseHelper
+    private lateinit var teamOneInput: EditText
+    private lateinit var teamTwoInput: EditText
+    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_changeteamname)
+        setContentView(R.layout.activity_change_team_name)
 
+        // 設置 Toolbar
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = "更改隊伍名稱"
-
-        toolbar.setNavigationOnClickListener {
-            finish()
+        supportActionBar?.apply {
+            title = "更改隊伍名稱"
+            setDisplayHomeAsUpEnabled(true)
         }
 
-        val teamAEditText: EditText = findViewById(R.id.team_a)
-        val teamBEditText: EditText = findViewById(R.id.team_b)
-        val confirmButton: Button = findViewById(R.id.button_confirm)
+        // 初始化 SharedPreferences
+        sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE)
 
-        databaseHelper = DatabaseHelper(this)
+        // 獲取輸入框
+        teamOneInput = findViewById(R.id.team_a_input)
+        teamTwoInput = findViewById(R.id.team_b_input)
 
-        // 從資料庫獲取當前隊伍名稱
-        val currentTeamAName = databaseHelper.getTeamName(1) // 假設隊伍 A ID 為 1
-        val currentTeamBName = databaseHelper.getTeamName(2) // 假設隊伍 B ID 為 2
+        // 設置當前隊伍名稱
+        teamOneInput.setText(sharedPreferences.getString("leftTeamName", "隊伍一"))
+        teamTwoInput.setText(sharedPreferences.getString("rightTeamName", "隊伍二"))
 
-        teamAEditText.setText(currentTeamAName)
-        teamBEditText.setText(currentTeamBName)
+        // 設置返回按鈕
+        toolbar.setNavigationOnClickListener { finish() }
 
-        confirmButton.setOnClickListener {
-            val teamAName = teamAEditText.text.toString()
-            val teamBName = teamBEditText.text.toString()
+        // 設置保存按鈕
+        val saveButton: Button = findViewById(R.id.save_button)
+        saveButton.setOnClickListener {
+            var teamOneName = teamOneInput.text.toString().trim()
+            var teamTwoName = teamTwoInput.text.toString().trim()
 
-            // 更新資料庫中的隊伍名稱
-            databaseHelper.updateTeamName(1, teamAName)
-            databaseHelper.updateTeamName(2, teamBName)
+            // 如果名稱為空，使用默認值
+            if (teamOneName.isEmpty()) teamOneName = "隊伍一"
+            if (teamTwoName.isEmpty()) teamTwoName = "隊伍二"
 
-            // 回傳結果
-            val resultIntent = Intent()
-            resultIntent.putExtra("teamAName", teamAName)
-            resultIntent.putExtra("teamBName", teamBName)
-            setResult(Activity.RESULT_OK, resultIntent)
+            // 保存到 SharedPreferences
+            sharedPreferences.edit().apply {
+                putString("leftTeamName", teamOneName)
+                putString("rightTeamName", teamTwoName)
+                apply()
+            }
+
             finish()
         }
     }

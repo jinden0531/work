@@ -1,22 +1,20 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-        <item
-            android:id="@+id/action_analyze"
-            android:title="數據分析"
-            android:orderInCategory="100"
-            android:titleTextColor="@color/black"
-            android:showAsAction="never" />
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    
+    <item
+        android:id="@+id/action_analyze"
+        android:title="分析"
+        app:showAsAction="never" />
 
-        <!-- 添加历史记录菜单项 -->
-        <item
-            android:id="@+id/action_history"
-            android:title="歷史紀錄"
-            android:orderInCategory="101"
-            android:titleTextColor="@color/black"
-            android:showAsAction="never" />
-        <item
-            android:id="@+id/action_changename"
-            android:title="更改隊伍名稱"
-            android:orderInCategory="101"
-            android:titleTextColor="@color/black"
-            android:showAsAction="never" />
+    <item
+        android:id="@+id/action_history"
+        android:title="歷史記錄"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_changename"
+        android:title="更改隊伍名稱"
+        app:showAsAction="never" />
+
 </menu>
